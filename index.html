@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karan Choudhary | Web Developer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap');
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+    font-family:'Syne',sans-serif;
+    background:#020617;
+    color:#e5e7eb;
+    overflow-x:hidden;
+    perspective:2600px;
+    position:relative;
+}
+
+/* CURSOR GLOW */
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:radial-gradient(500px at var(--mx,50%) var(--my,50%), rgba(56,189,248,.22), transparent 45%);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    z-index:-1;
+}
+
+/* HEADER WITH FIREFLIES */
+header{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* Fireflies container */
+#fireflies{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-2;
+    overflow:hidden;
+}
+
+/* HEADER TEXT */
+header h1{
+    font-size:3.8rem;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#ffffff;
+    opacity:0;
+    transform:translateY(80px);
+    animation:intro 1.5s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+header p{
+    margin-top:18px;
+    font-size:1.2rem;
+    color:#e0e7ff;
+    opacity:0;
+    animation:intro 1.5s .3s forwards;
+}
+
+@keyframes intro{
+    to{opacity:1;transform:none;}
+}
+
+/* NAV */
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:center;
+    margin-bottom:40px;
+}
+
+nav ul{
+    display:flex;
+    gap:40px;
+    list-style:none;
+    padding:18px 60px;
+    border-radius:90px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(22px);
+    box-shadow:0 40px 120px rgba(0,0,0,.9);
+}
+
+nav a{
+    color:#cbd5f5;
+    text-decoration:none;
+    font-weight:500;
+    position:relative;
+}
+
+nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:-6px;
+    width:0;height:2px;
+    background:#38bdf8;
+    transition:.3s;
+}
+
+nav a:hover::after{width:100%}
+nav a:hover{color:#38bdf8}
+
+/* SECTION */
+section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:50px 0;
+}
+
+/* INTRO CARD */
+.card{
+    width:min(920px,90%);
+    padding:90px;
+    border-radius:48px;
+    background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+    box-shadow:0 120px 260px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.12);
+    transform-style:preserve-3d;
+}
+
+/* IMAGE */
+#karan{
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    display:block;
+    margin:0 auto 50px;
+    object-fit:cover;
+    box-shadow:0 30px 80px rgba(56,189,248,.35);
+    transform:translateZ(130px);
+}
+
+/* TEXT */
+.card h2{
+    text-align:center;
+    font-size:2.4rem;
+    margin-bottom:30px;
+    color:#38bdf8;
+    transform:translateZ(100px);
+}
+
+.card p{
+    font-size:1.15rem;
+    line-height:1.9;
+    margin-bottom:22px;
+    color:#d1d5db;
+    transform:translateZ(70px);
+}
+
+/* FOOTER */
+footer{
+    padding:60px;
+    text-align:center;
+    color:#64748b;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    header h1{font-size:2.4rem;}
+    nav ul{gap:22px;padding:14px 30px;}
+    .card{padding:45px;}
+}
+
+/* FLOATING ACTION BUTTON - INSTAGRAM */
+.fab-insta{
+    position:fixed;
+    right:24px;        /* left chahiye to right → left */
+    bottom:24px;
+    width:60px;
+    height:60px;
+    background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.6);
+    z-index:999;
+    transition:.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ICON */
+.fab-insta img{
+    width:28px;
+    height:28px;
+    filter:brightness(0) invert(1);
+}
+
+/* HOVER EFFECT */
+.fab-insta:hover{
+    transform:translateY(-6px) scale(1.08);
+    box-shadow:0 25px 70px rgba(0,0,0,.8);
+}
+
+/* PULSE ANIMATION */
+.fab-insta::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    animation:pulse 2.2s infinite;
+    z-index:-1;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:.5;}
+    70%{transform:scale(1.8);opacity:0;}
+    100%{opacity:0;}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .fab-insta{
+        width:52px;
+        height:52px;
+        right:18px;
+        bottom:18px;
+    }
+}
+
+/* SCREEN ATTACHED FLOATING INSTAGRAM */
+.fab-insta{
+    position:fixed;
+    right:0;                 /* screen ke edge se chipka */
+    top:50%;                 /* vertically center */
+    transform:translateY(-50%);
+    width:64px;
+    height:64px;
+    background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);
+    border-radius:18px 0 0 18px;   /* attached look */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:-8px 20px 50px rgba(0,0,0,.7);
+    z-index:999;
+    transition:.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ICON */
+.fab-insta img{
+    width:28px;
+    filter:invert(1);
+}
+
+/* HOVER – thoda bahar nikle */
+.fab-insta:hover{
+    transform:translate(-10px,-50%);
+    box-shadow:-15px 30px 80px rgba(0,0,0,.9);
+}
+
+/* PULSE GLOW */
+.fab-insta::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:18px 0 0 18px;
+    background:rgba(255,255,255,.3);
+    animation:pulse 2.5s infinite;
+    z-index:-1;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:.4;}
+    70%{transform:scale(1.4);opacity:0;}
+    100%{opacity:0;}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .fab-insta{
+        width:54px;
+        height:54px;
+        border-radius:14px 0 0 14px;
+    }
+}
+
+
+</style>
+</head>
+<body>
+
+<!-- Fireflies Container -->
+<div id="fireflies"></div>
+
+<header>
+    <h1>Karan Choudhary</h1>
+    <p>Modern Web Developer & UI Experience Designer</p>
+</header>
+
+<nav>
+<ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="project.html">Projects</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+
+<section id="home">
+<div class="card">
+<img src="img video/IMG-20250203-WA0069.jpg" id="karan">
+
+<h2>Introduction</h2>
+
+<p>Hello! My name is <strong>Karan Choudhary</strong>, and I am a passionate Web Developer who builds modern, high-quality websites.</p>
+
+<p>I focus on interactive UI, animations, responsive design, and fast performance using <strong>HTML, CSS, JS</strong>.</p>
+
+<p>My goal is to turn ideas into powerful digital products with impact.</p>
+
+<p><h2> Tish website also made by Karan Choudhary </h2></p>
+</div>
+</section>
+<a href="https://www.instagram.com/the_web_developer_1000?igsh=N293bmRheXVycWZx"
+   class="fab-insta"
+   target="_blank"
+   aria-label="Instagram">
+   <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+
+<footer>© Web Developer — Karan Choudhary</footer>
+
+
+
+</body>
+
+<script>
+// CURSOR GLOW
+document.addEventListener("mousemove", e=>{
+    document.body.style.setProperty("--mx", e.clientX+"px");
+    document.body.style.setProperty("--my", e.clientY+"px");
+});
+
+// 3D INTRO CARD
+const card = document.querySelector(".card");
+let cx=0, cy=0, tx=0, ty=0;
+card.addEventListener("mousemove", e=>{
+    const r = card.getBoundingClientRect();
+    tx = ((e.clientX-r.left)/r.width - .5) * 18;
+    ty = ((e.clientY-r.top)/r.height - .5) * -18;
+});
+card.addEventListener("mouseleave",()=>{tx=ty=0;});
+function animate(){ cx+=(tx-cx)*0.06; cy+=(ty-cy)*0.06; card.style.transform=`rotateY(${cx}deg) rotateX(${cy}deg) translateZ(50px)`; requestAnimationFrame(animate);}
+animate();
+
+// FIREFLIES ANIMATION
+const firefliesContainer = document.getElementById('fireflies');
+const fireflies = [];
+const firefliesCount = 40;
+
+for(let i=0;i<firefliesCount;i++){
+    const div = document.createElement('div');
+    div.classList.add('firefly');
+    div.style.position='absolute';
+    div.style.width=div.style.height=(Math.random()*4+2)+'px';
+    div.style.background='rgba(56,189,248,'+(Math.random()*0.7+0.3)+')';
+    div.style.borderRadius='50%';
+    div.style.top=Math.random()*100+'%';
+    div.style.left=Math.random()*100+'%';
+    div.style.opacity=Math.random();
+    firefliesContainer.appendChild(div);
+    fireflies.push({el:div,x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,dx:(Math.random()-0.5)*0.3,dy:(Math.random()-0.5)*0.3,opacity:parseFloat(div.style.opacity)});
+}
+
+function animateFireflies(){
+    fireflies.forEach(f=>{
+        f.x+=f.dx; f.y+=f.dy;
+        if(f.x<0||f.x>window.innerWidth) f.dx*=-1;
+        if(f.y<0||f.y>window.innerHeight) f.dy*=-1;
+        f.el.style.transform=`translate(${f.x}px,${f.y}px)`;
+        // subtle flicker
+        f.el.style.opacity=0.3+Math.sin(Date.now()/1000+f.x+f.y)*0.3;
+    });
+    requestAnimationFrame(animateFireflies);
+}
+animateFireflies();
+</script>
+</html>

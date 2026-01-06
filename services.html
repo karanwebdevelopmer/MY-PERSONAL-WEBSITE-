@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Karan Choudhary</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap');
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+    font-family:'Syne',sans-serif;
+    background:#020617;
+    color:#e5e7eb;
+    overflow-x:hidden;
+    perspective:2600px;
+    position:relative;
+}
+
+/* CURSOR GLOW */
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:radial-gradient(500px at var(--mx,50%) var(--my,50%), rgba(56,189,248,.22), transparent 45%);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    z-index:-1;
+}
+
+/* HEADER + FIREFLIES */
+header{
+    height:40vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+#fireflies{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-2;
+    overflow:hidden;
+}
+
+header h1{
+    font-size:3rem;
+    font-weight:700;
+    color:#ffffff;
+    opacity:0;
+    transform:translateY(50px);
+    animation:intro 1.5s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes intro{
+    to{opacity:1;transform:none;}
+}
+
+/* NAVIGATION */
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:center;
+    margin-bottom:40px;
+}
+
+nav ul{
+    display:flex;
+    gap:40px;
+    list-style:none;
+    padding:18px 60px;
+    border-radius:90px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(22px);
+    box-shadow:0 40px 120px rgba(0,0,0,.9);
+}
+
+nav a{
+    color:#cbd5f5;
+    text-decoration:none;
+    font-weight:500;
+    position:relative;
+}
+
+nav a::after{
+    content:'';
+    position:absolute;
+    left:0;bottom:-6px;
+    width:0;height:2px;
+    background:#38bdf8;
+    transition:.3s;
+}
+
+nav a:hover::after{width:100%}
+nav a:hover{color:#38bdf8}
+
+/* MAIN SECTION */
+main{
+    max-width:1000px;
+    margin:0 auto;
+    padding:50px 20px;
+}
+
+main ul{
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+main ul li{
+    background:rgba(255,255,255,.05);
+    padding:18px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.6);
+    transition:.3s;
+    cursor:pointer;
+}
+
+main ul li:hover{
+    transform:scale(1.05);
+    box-shadow:0 30px 70px rgba(0,0,0,.8);
+}
+
+main ul li::before{
+    content:'✔';
+    margin-right:6px;
+    color:#38bdf8;
+}
+
+footer{
+    padding:50px;
+    text-align:center;
+    color:#64748b;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    header h1{font-size:2rem;}
+    nav ul{gap:22px;padding:14px 30px;}
+    main ul{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+}
+
+/* LIST ITEM CLICK ANIMATION */
+main ul li {
+    background:rgba(255,255,255,.05);
+    padding:18px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,.6);
+    transition:.3s, background-color .3s;
+    cursor:pointer;
+    position:relative;
+}
+
+main ul li:hover{
+    transform:scale(1.05);
+    box-shadow:0 30px 70px rgba(0,0,0,.8);
+}
+
+/* SELECTED EFFECT */
+main ul li.selected {
+    background:rgba(56,189,248,.3);
+    box-shadow:0 35px 80px rgba(56,189,248,.6);
+    transform:scale(1.08);
+    animation: pop 0.3s ease forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.9); opacity:0.7; }
+    50% { transform: scale(1.12); opacity:1; }
+    100% { transform: scale(1.08); opacity:1; }
+}
+
+/* SCREEN ATTACHED FLOATING INSTAGRAM */
+.fab-insta{
+    position:fixed;
+    right:0;                 /* screen ke edge se chipka */
+    top:50%;                 /* vertically center */
+    transform:translateY(-50%);
+    width:64px;
+    height:64px;
+    background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);
+    border-radius:18px 0 0 18px;   /* attached look */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:-8px 20px 50px rgba(0,0,0,.7);
+    z-index:999;
+    transition:.35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ICON */
+.fab-insta img{
+    width:28px;
+    filter:invert(1);
+}
+
+/* HOVER – thoda bahar nikle */
+.fab-insta:hover{
+    transform:translate(-10px,-50%);
+    box-shadow:-15px 30px 80px rgba(0,0,0,.9);
+}
+
+/* PULSE GLOW */
+.fab-insta::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:18px 0 0 18px;
+    background:rgba(255,255,255,.3);
+    animation:pulse 2.5s infinite;
+    z-index:-1;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:.4;}
+    70%{transform:scale(1.4);opacity:0;}
+    100%{opacity:0;}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .fab-insta{
+        width:54px;
+        height:54px;
+        border-radius:14px 0 0 14px;
+    }
+}
+
+/* SERVICE SEARCH BAR */
+.service-search{
+    max-width:500px;
+    margin:0 auto 30px;
+}
+
+.service-search input{
+    width:100%;
+    padding:14px 20px;
+    border-radius:40px;
+    border:none;
+    outline:none;
+    font-size:15px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    backdrop-filter:blur(20px);
+    box-shadow:0 15px 40px rgba(0,0,0,.6);
+    transition:.3s;
+}
+
+.service-search input::placeholder{
+    color:#94a3b8;
+}
+
+.service-search input:focus{
+    box-shadow:0 0 0 2px #38bdf8;
+    background:rgba(255,255,255,.12);
+}
+
+</style>
+</head>
+<body>
+
+<!-- Fireflies Background -->
+<div id="fireflies"></div>
+
+<header>
+    <h1>Services</h1>
+</header>
+
+<nav>
+<ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+<a href="https://www.instagram.com/the_web_developer_1000?igsh=N293bmRheXVycWZx"
+   class="fab-insta"
+   target="_blank"
+   aria-label="Instagram">
+   <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+<main>
+    <div class="service-search">
+    <input type="text" id="serviceSearch" placeholder="Search services... 🔍">
+</div>
+
+    <ul>
+        <li>School Website</li>
+        <li>College Website</li>
+        <li>Coaching / Tuition Website</li>
+        <li>Online Course Website</li>
+        <li>E-Learning Platform</li>
+
+        <li>Mobile Shop Website</li>
+        <li>Electronics Shop Website</li>
+        <li>Grocery Store Website</li>
+        <li>Medical / Pharmacy Website</li>
+        <li>Clothing Store Website</li>
+
+        <li>Restaurant Website</li>
+        <li>Hotel Website</li>
+        <li>Cafe Website</li>
+        <li>Food Delivery Website</li>
+        <li>Catering Service Website</li>
+
+        <li>Personal Portfolio Website</li>
+        <li>Resume / CV Website</li>
+        <li>Freelancer Website</li>
+        <li>Photographer Portfolio</li>
+        <li>Graphic Designer Portfolio</li>
+
+        <li>Company Official Website</li>
+        <li>IT Company Website</li>
+        <li>Digital Marketing Agency</li>
+        <li>Real Estate Website</li>
+        <li>Construction Company Website</li>
+
+        <li>Hospital Website</li>
+        <li>Clinic Website</li>
+        <li>Doctor Appointment Website</li>
+        <li>Gym / Fitness Website</li>
+        <li>Yoga Center Website</li>
+
+        <li>Blog Website</li>
+        <li>News Website</li>
+        <li>Tech Blog Website</li>
+        <li>Educational Blog</li>
+        <li>Motivational Website</li>
+
+        <li>E-Commerce Website</li>
+        <li>Online Shopping Website</li>
+        <li>Job Portal Website</li>
+        <li>Event Management Website</li>
+    </ul>
+</main>
+
+<footer>© Karan Choudhary</footer>
+
+
+</body>
+
+<script>
+// CURSOR GLOW
+document.addEventListener("mousemove", e=>{
+    document.body.style.setProperty("--mx", e.clientX+"px");
+    document.body.style.setProperty("--my", e.clientY+"px");
+});
+
+// FIREFLIES ANIMATION
+const firefliesContainer = document.getElementById('fireflies');
+const fireflies = [];
+const firefliesCount = 40;
+
+for(let i=0;i<firefliesCount;i++){
+    const div = document.createElement('div');
+    div.classList.add('firefly');
+    div.style.position='absolute';
+    div.style.width=div.style.height=(Math.random()*4+2)+'px';
+    div.style.background='rgba(56,189,248,'+(Math.random()*0.7+0.3)+')';
+    div.style.borderRadius='50%';
+    div.style.top=Math.random()*100+'%';
+    div.style.left=Math.random()*100+'%';
+    div.style.opacity=Math.random();
+    firefliesContainer.appendChild(div);
+    fireflies.push({el:div,x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,dx:(Math.random()-0.5)*0.3,dy:(Math.random()-0.5)*0.3,opacity:parseFloat(div.style.opacity)});
+}
+
+function animateFireflies(){
+    fireflies.forEach(f=>{
+        f.x+=f.dx; f.y+=f.dy;
+        if(f.x<0||f.x>window.innerWidth) f.dx*=-1;
+        if(f.y<0||f.y>window.innerHeight) f.dy*=-1;
+        f.el.style.transform=`translate(${f.x}px,${f.y}px)`;
+        f.el.style.opacity=0.3+Math.sin(Date.now()/1000+f.x+f.y)*0.3;
+    });
+    requestAnimationFrame(animateFireflies);
+}
+animateFireflies();
+
+// CLICK SERVICE → SAVE TO CONTACT + SELECT ANIMATION
+const serviceItems = document.querySelectorAll('main ul li');
+
+serviceItems.forEach(li=>{
+    li.addEventListener('click', ()=>{
+        // remove previous selected
+        serviceItems.forEach(item=>item.classList.remove('selected'));
+        
+        // add selected class
+        li.classList.add('selected');
+        
+        // save to localStorage
+        localStorage.setItem('selectedService', li.textContent);
+        
+        // alert (optional)
+        setTimeout(()=>{ alert(`"${li.textContent}" selected! Now go to Contact page.`); }, 100);
+    });
+});
+
+// SERVICE SEARCH FUNCTIONALITY
+const searchInput = document.getElementById("serviceSearch");
+const services = document.querySelectorAll("main ul li");
+
+searchInput.addEventListener("keyup", () => {
+    const value = searchInput.value.toLowerCase();
+
+    services.forEach(service => {
+        const text = service.textContent.toLowerCase();
+        service.style.display = text.includes(value) ? "block" : "none";
+    });
+});
+
+
+</script>
+</html>
+
