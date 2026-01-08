@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,8 @@
 <title>Contact | Karan Choudhary</title>
 
 <style>
+    
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap');
-
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -19,8 +19,6 @@ body{
     perspective:2600px;
     position:relative;
 }
-
-/* CURSOR GLOW */
 body::before{
     content:'';
     position:fixed;
@@ -30,315 +28,109 @@ body::before{
     mix-blend-mode:screen;
     z-index:-1;
 }
-
-/* HEADER + FIREFLIES */
 header{
     height:40vh;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
 }
-
-#fireflies{
-    position:absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index:-2;
-    overflow:hidden;
-}
-
-header h1{
-    font-size:3rem;
-    font-weight:700;
-    color:#ffffff;
-    opacity:0;
-    transform:translateY(50px);
-    animation:intro 1.5s cubic-bezier(.2,.8,.2,1) forwards;
-}
-
-@keyframes intro{
-    to{opacity:1;transform:none;}
-}
-
-/* NAVIGATION */
-nav{
-    position:sticky;
-    top:0;
-    z-index:100;
-    display:flex;
-    justify-content:center;
-    margin-bottom:40px;
-}
-
-nav ul{
-    display:flex;
-    gap:40px;
-    list-style:none;
-    padding:18px 60px;
-    border-radius:90px;
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(22px);
-    box-shadow:0 40px 120px rgba(0,0,0,.9);
-}
-
-nav a{
-    color:#cbd5f5;
-    text-decoration:none;
-    font-weight:500;
-    position:relative;
-}
-
-nav a::after{
-    content:''; position:absolute; left:0; bottom:-6px;
-    width:0; height:2px; background:#38bdf8; transition:.3s;
-}
-
-nav a:hover::after{width:100%}
-nav a:hover{color:#38bdf8}
-
-/* MAIN FORM */
-main{
-    max-width:600px;
-    margin:0 auto;
-    padding:50px 20px;
-}
-
+header h1{font-size:3rem;color:white}
+main{max-width:600px;margin:auto;padding:50px 20px}
 form{
     display:flex;
     flex-direction:column;
-    gap:25px;
+    gap:20px;
     background:rgba(255,255,255,.05);
     padding:30px;
     border-radius:25px;
-    box-shadow:0 30px 80px rgba(0,0,0,.6);
 }
-
-form label{
-    font-weight:600;
-    color:#38bdf8;
-}
-
-form input, form textarea{
-    padding:12px 15px;
-    border-radius:15px;
+form label{color:#38bdf8;font-weight:600}
+form input,form textarea{
+    padding:12px;
+    border-radius:12px;
     border:none;
-    outline:none;
     background:rgba(255,255,255,.1);
-    color:#e5e7eb;
-    font-size:1rem;
-    resize:none;
-    transition:.3s;
+    color:white;
 }
-
-form input:focus, form textarea:focus{
-    background:rgba(56,189,248,.15);
-    box-shadow:0 0 15px rgba(56,189,248,.4);
-}
-
-form button{
-    padding:12px 20px;
+button{
+    padding:12px;
     border:none;
     border-radius:20px;
     background:#38bdf8;
-    color:#020617;
-    font-weight:600;
+    font-weight:700;
     cursor:pointer;
-    transition:.3s;
 }
-
-form button:hover{
-    background:#0ea5e9;
-}
-
-/* FOOTER */
-footer{
-    padding:50px;
-    text-align:center;
-    color:#64748b;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    header h1{font-size:2rem;}
-    nav ul{gap:22px;padding:14px 30px;}
-    form{padding:20px;}
-}
-
-/* SCREEN ATTACHED FLOATING INSTAGRAM */
-.fab-insta{
-    position:fixed;
-    right:0;                 /* screen ke edge se chipka */
-    top:50%;                 /* vertically center */
-    transform:translateY(-50%);
-    width:64px;
-    height:64px;
-    background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4);
-    border-radius:18px 0 0 18px;   /* attached look */
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:-8px 20px 50px rgba(0,0,0,.7);
-    z-index:999;
-    transition:.35s cubic-bezier(.4,0,.2,1);
-}
-
-/* ICON */
-.fab-insta img{
-    width:28px;
-    filter:invert(1);
-}
-
-/* HOVER – thoda bahar nikle */
-.fab-insta:hover{
-    transform:translate(-10px,-50%);
-    box-shadow:-15px 30px 80px rgba(0,0,0,.9);
-}
-
-/* PULSE GLOW */
-.fab-insta::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    border-radius:18px 0 0 18px;
-    background:rgba(255,255,255,.3);
-    animation:pulse 2.5s infinite;
-    z-index:-1;
-}
-
-@keyframes pulse{
-    0%{transform:scale(1);opacity:.4;}
-    70%{transform:scale(1.4);opacity:0;}
-    100%{opacity:0;}
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    .fab-insta{
-        width:54px;
-        height:54px;
-        border-radius:14px 0 0 14px;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Fireflies -->
-<div id="fireflies"></div>
-
-<header>
-    <h1>Contact Me</h1>
-</header>
-
-<nav>
-<ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
-<a href="https://www.instagram.com/the_web_developer_1000?igsh=N293bmRheXVycWZx"
-   class="fab-insta"
-   target="_blank"
-   aria-label="Instagram">
-   <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-</a>
+<header><h1>Contact Me</h1></header>
 
 <main>
 <form id="contactForm">
-    <label for="name">Your Name</label>
-    <input type="text" id="name" placeholder="Enter Your Name" required>
+    <label>Your Name</label>
+    <input type="text" id="name" required>
 
-    <label for="mobile">Mobile Number</label>
-    <input type="number" id="mobile" placeholder="Enter Your Mobile Number" required>
+    <label>Mobile Number</label>
+    <input type="number" id="mobile" required>
 
-    <label for="services">Selected Service</label>
-    <textarea id="services" placeholder="Select a service from Services page" required></textarea>
+    <label>Selected Service</label>
+    <textarea id="services" required></textarea>
 
     <button type="submit">Submit</button>
 </form>
 </main>
 
-<footer>© Karan Choudhary</footer>
+<!-- 🔥 FIREBASE + FORM LOGIC -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+/* ✅ AAPKA FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyCoi0Lbcr9J-sAB2eYcCxWvAzHDEDjZS1I",
+  authDomain: "personal-web-admin.firebaseapp.com",
+  databaseURL: "https://personal-web-admin-default-rtdb.firebaseio.com",
+  projectId: "personal-web-admin",
+  storageBucket: "personal-web-admin.firebasestorage.app",
+  messagingSenderId: "470159508464",
+  appId: "1:470159508464:web:7eddaad64e671bd1d99335"
+};
 
-</body>
-<script>
-// CURSOR GLOW
-document.addEventListener("mousemove", e=>{
-    document.body.style.setProperty("--mx", e.clientX+"px");
-    document.body.style.setProperty("--my", e.clientY+"px");
-});
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-// FIREFLIES
-const firefliesContainer = document.getElementById('fireflies');
-const fireflies = [];
-const firefliesCount = 40;
-
-for(let i=0;i<firefliesCount;i++){
-    const div = document.createElement('div');
-    div.classList.add('firefly');
-    div.style.position='absolute';
-    div.style.width=div.style.height=(Math.random()*4+2)+'px';
-    div.style.background='rgba(56,189,248,'+(Math.random()*0.7+0.3)+')';
-    div.style.borderRadius='50%';
-    div.style.top=Math.random()*100+'%';
-    div.style.left=Math.random()*100+'%';
-    div.style.opacity=Math.random();
-    firefliesContainer.appendChild(div);
-    fireflies.push({el:div,x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,dx:(Math.random()-0.5)*0.3,dy:(Math.random()-0.5)*0.3,opacity:parseFloat(div.style.opacity)});
-}
-
-function animateFireflies(){
-    fireflies.forEach(f=>{
-        f.x+=f.dx; f.y+=f.dy;
-        if(f.x<0||f.x>window.innerWidth) f.dx*=-1;
-        if(f.y<0||f.y>window.innerHeight) f.dy*=-1;
-        f.el.style.transform=`translate(${f.x}px,${f.y}px)`;
-        f.el.style.opacity=0.3+Math.sin(Date.now()/1000+f.x+f.y)*0.3;
-    });
-    requestAnimationFrame(animateFireflies);
-}
-animateFireflies();
-
-// AUTO-FILL SELECTED SERVICE
-const selectedService = localStorage.getItem('selectedService');
+/* AUTO FILL SERVICE */
+const selectedService = localStorage.getItem("selectedService");
 if(selectedService){
-    document.getElementById('services').value = selectedService;
+  document.getElementById("services").value = selectedService;
 }
 
-// FORM SUBMIT
-document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value.trim();
-    const mobile = document.getElementById('mobile').value.trim();
-    const service = document.getElementById('services').value.trim();
+/* FORM SUBMIT */
+document.getElementById("contactForm").addEventListener("submit", e => {
+  e.preventDefault();
 
-    if(!name || !mobile || !service){
-        alert("Please fill all fields!");
-        return;
-    }
+  const name = document.getElementById("name").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const service = document.getElementById("services").value.trim();
 
-    // Optionally, save to localStorage for admin.html
-    let contacts = JSON.parse(localStorage.getItem('contacts') || "[]");
-    contacts.push({name, mobile, service, time: new Date().toLocaleString()});
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+  if(!name || !mobile || !service){
+    alert("Please fill all fields");
+    return;
+  }
 
-    // Thank You popup
-    alert(`Thank you, ${name}! Your request for "${service}" has been submitted.`);
+  push(ref(db, "contacts"), {
+    name,
+    mobile,
+    service,
+    time: new Date().toLocaleString()
+  });
 
-    // Reset form
-    this.reset();
+  alert("✅ Your request has been submitted successfully");
+  e.target.reset();
 });
 </script>
 
+</body>
 </html>
-
