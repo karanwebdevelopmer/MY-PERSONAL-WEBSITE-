@@ -23,7 +23,6 @@ body{
     justify-content:center;
     align-items:center;
 }
-
 .login-box{
     background:rgba(255,255,255,.07);
     padding:40px;
@@ -31,13 +30,11 @@ body{
     width:320px;
     box-shadow:0 30px 90px rgba(0,0,0,.8);
 }
-
 .login-box h2{
     text-align:center;
     margin-bottom:20px;
     color:#38bdf8;
 }
-
 .login-box input{
     width:100%;
     padding:12px;
@@ -47,7 +44,6 @@ body{
     background:rgba(255,255,255,.1);
     color:#fff;
 }
-
 .login-box button{
     width:100%;
     padding:12px;
@@ -63,27 +59,17 @@ body{
     display:none;
     padding:40px;
 }
-
 .top-bar{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-bottom:30px;
 }
-
 .top-bar h1{color:#38bdf8}
 
-.top-bar a{
-    color:#38bdf8;
-    text-decoration:none;
-    font-weight:600;
-}
-
-/* ACTION BUTTONS */
 .actions{
     margin-bottom:20px;
 }
-
 .actions button{
     padding:10px 20px;
     border:none;
@@ -92,24 +78,18 @@ body{
     cursor:pointer;
     font-weight:600;
 }
-
 .deleteAll{background:#ef4444;color:white}
-.export{background:#22c55e;color:#020617}
 
 /* TABLE */
 table{
     width:100%;
     border-collapse:collapse;
 }
-
 th,td{
     padding:14px;
     border-bottom:1px solid rgba(255,255,255,.1);
-    text-align:left;
 }
-
 th{color:#38bdf8}
-
 .deleteBtn{
     background:#ef4444;
     border:none;
@@ -117,11 +97,6 @@ th{color:#38bdf8}
     border-radius:20px;
     color:white;
     cursor:pointer;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    table{font-size:.9rem}
 }
 </style>
 </head>
@@ -142,14 +117,10 @@ th{color:#38bdf8}
 <div id="adminPanel">
     <div class="top-bar">
         <h1>Admin Panel</h1>
-        <a href="https://www.instagram.com/the_web_developer_1000?igsh=N293bmRheXVycWZx" target="_blank">
-            📩 Instagram
-        </a>
     </div>
 
     <div class="actions">
         <button class="deleteAll" onclick="deleteAll()">Delete All</button>
-        <button class="export" onclick="exportData()">Export Data</button>
     </div>
 
     <table>
@@ -158,6 +129,7 @@ th{color:#38bdf8}
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Service</th>
+                <th>Time</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -165,66 +137,73 @@ th{color:#38bdf8}
     </table>
 </div>
 
-<script>
-const ADMIN_USER="karan";
-const ADMIN_PASS="karan128";
+<!-- 🔥 FIREBASE SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+/* ✅ FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyCoi0Lbcr9J-sAB2eYcCxWvAzHDEDjZS1I",
+  authDomain: "personal-web-admin.firebaseapp.com",
+  databaseURL: "https://personal-web-admin-default-rtdb.firebaseio.com",
+  projectId: "personal-web-admin",
+  storageBucket: "personal-web-admin.firebasestorage.app",
+  messagingSenderId: "470159508464",
+  appId: "1:470159508464:web:7eddaad64e671bd1d99335"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 /* LOGIN */
-function login(){
-    if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
+window.login = function(){
+    if(username.value==="karan" && password.value==="karan128"){
         document.getElementById("login").style.display="none";
         document.getElementById("adminPanel").style.display="block";
         loadData();
     }else{
-        alert("Wrong login details!");
+        alert("Wrong login details");
     }
-}
+};
 
 /* LOAD DATA */
 function loadData(){
-    const contacts=JSON.parse(localStorage.getItem("contacts")||"[]");
-    const tbody=document.getElementById("data");
-    tbody.innerHTML="";
-    contacts.forEach((c,i)=>{
-        tbody.innerHTML+=`
-        <tr>
-            <td>${c.name}</td>
-            <td>${c.mobile}</td>
-            <td>${c.service}</td>
-            <td><button class="deleteBtn" onclick="deleteOne(${i})">Delete</button></td>
-        </tr>`;
+    const tbody = document.getElementById("data");
+    onValue(ref(db, "contacts"), snapshot => {
+        tbody.innerHTML = "";
+        snapshot.forEach(child => {
+            const d = child.val();
+            const key = child.key;
+            tbody.innerHTML += `
+            <tr>
+                <td>${d.name}</td>
+                <td>${d.mobile}</td>
+                <td>${d.service}</td>
+                <td>${d.time}</td>
+                <td>
+                  <button class="deleteBtn" onclick="deleteOne('${key}')">Delete</button>
+                </td>
+            </tr>`;
+        });
     });
 }
 
 /* DELETE ONE */
-function deleteOne(i){
-    const contacts=JSON.parse(localStorage.getItem("contacts"));
-    contacts.splice(i,1);
-    localStorage.setItem("contacts",JSON.stringify(contacts));
-    loadData();
-}
+window.deleteOne = function(key){
+    remove(ref(db, "contacts/" + key));
+};
 
 /* DELETE ALL */
-function deleteAll(){
+window.deleteAll = function(){
     if(confirm("Delete all data?")){
-        localStorage.removeItem("contacts");
-        loadData();
+        remove(ref(db, "contacts"));
     }
-}
-
-/* EXPORT DATA */
-function exportData(){
-    const data=localStorage.getItem("contacts");
-    if(!data){alert("No data to export");return}
-    const blob=new Blob([data],{type:"application/json"});
-    const a=document.createElement("a");
-    a.href=URL.createObjectURL(blob);
-    a.download="contacts-data.json";
-    a.click();
-}
+};
 </script>
 
 </body>
 </html>
+
 
 
